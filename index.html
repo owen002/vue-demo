@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-demo</title>
+    <style>
+        .active {
+            color: #ff0000;
+            font-size: 20px;
+            background-color: #f4f4f4;
+        }
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s
+        }
+        .fade-enter, .fade-leave-active {
+            opacity: 0
+        }
+    </style>
+</head>
+<body>
+<div id="app" :title="message" v-if="seen">
+    <div v-if="messageSwitch">
+        Can u see me?
+        <button @click="clickbutton">点我</button>
+        <p>
+            <input type="text" v-model.trim="message">
+        </p>
+        <div>{{message|messageFilter}}</div>
+    </div>
+
+    <todo v-for="todo in todos" :ins="todo" v-show="todoSwitch"></todo>
+
+    <div v-show="nameSwitch">
+        <div :class="classObject">
+            firstName:<input type="text" v-model="firstName">
+        </div>
+        <div>
+            lastName:<input type="text" v-model="lastName">
+        </div>
+        <div>
+            fullName:<input type="text" v-model="fullName">
+        </div>
+    </div>
+
+
+    <div v-show="questionSwitch">
+        type in the question: <input type="text" v-model="question">
+        <div>
+            {{answer}}
+        </div>
+    </div>
+
+    <p>
+        <select name="" id="" v-model="selectArr">
+            <option value="AA">A</option>
+            <option value="BB">B</option>
+            <option value="CC">C</option>
+        </select>
+    <div>
+        {{selectArr}}
+    </div>
+    </p>
+
+    <p>
+        <input type="checkbox" value="owen" v-model="checkedArr">owen
+        <input type="checkbox" value="raul" v-model="checkedArr">raul
+    <div>
+        {{checkedArr}}
+    </div>
+    </p>
+
+    <p>
+        <my-button @increment1="increaseEach"></my-button>
+        <my-button @increment1="increaseEach"></my-button>
+    <div>{{totalClick}}</div>
+    </p>
+
+    <!--<p>-->
+    <!--<p>{{message}}</p>-->
+    <!--<v-model-example label="Message" v-model="message"></v-model-example>-->
+    <!--</p>-->
+    <p>
+        <p>{{currentView}}</p>
+        <component :is="currentView" label="Message"></component>
+    </p>
+
+    <p>
+    <h1>I'm the parent title</h1>
+        <my-slot>
+            <h2 slot = 'child-slot1'>here is the parent-slot1</h2>
+            <div slot = 'child-slot2'>here is the parent-slot2</div>
+        </my-slot>
+    </p>
+
+    <p style="margin-top:40px;">
+        <h1>动画</h1>
+    {{woyoubugSSS}}
+    <button @click="woyoubugSSS = !woyoubugSSS">toggle</button>
+    <transition  name="fade">
+        <p v-show="woyoubugSSS" >hello</p>
+    </transition >
+    </p>
+</div>
+<template id="todo-list">
+    <h1>{{ins}}</h1>
+</template>
+</body>
+<script src="dist/bundle.js"></script>
+</html>
